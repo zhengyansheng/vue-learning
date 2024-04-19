@@ -4,15 +4,11 @@
 <MySalary ref="SalaryInfo"></MySalary><br>
 <button @click="addSalary">提交</button>
 
-<br>
-<MyElementPlus></MyElementPlus>
-
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import MySalary from "./components/MySalary.vue"
-import MyElementPlus from '@/components/MyElementPlus.vue'
 
 let SalaryInfo = ref()
 
