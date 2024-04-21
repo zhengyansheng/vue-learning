@@ -3,7 +3,7 @@
   <div >
     <el-form :model="form" label-width="auto" style="max-width: 600px">
       <el-form-item label="实例 ID">
-        <el-input v-model="form.instance_id" />
+        <el-input v-model="form.jsonData.instance_id" />
       </el-form-item>
       <el-form-item label="主机名">
         <el-input v-model="form.hostname" />
@@ -52,24 +52,38 @@
 
 import { ref  } from 'vue';
 import { reactive } from 'vue';
-import { toRefs, defineProps } from 'vue'
+import { toRefs, defineProps, toRef } from 'vue'
 
 // 使用 ref 创建一个变量控制窗口的显示和隐藏
 const dialogFormVisible = ref(true);
 
-// do not use same name with ref
-const form = reactive({
-  instance_id: '',
-  hostname: '',
-  instance_type: '',
-  date1: '',
-  date2: '',
-  platform: '',
-})
+// // do not use same name with ref
+// const form = reactive({
+//   instance_id: '',
+//   hostname: '',
+//   instance_type: '',
+//   date1: '',
+//   date2: '',
+//   platform: '',
+// })
 
-// 将 数据 暴露给父组件
-defineExpose({
-  form, 
+// 接收父组件传递过来的JSON数据
+// const jsonDataProps  = defineProps(["jsonData"]);
+// const form = ref(jsonDataProps);
+// console.log(form)
+
+// 接收父组件传递过来的JSON数据
+const props = defineProps({
+  jsonData: {
+    type: Object,
+    required: true
+  }
+});
+
+// 使用 toRef 将对象的属性转换为响应式的
+const formData = reactive({
+  instance_id: toRef(props.jsonData, 'instance_id'),
+  // 其他属性同样转换为 toRef
 });
 
 </script>

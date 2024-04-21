@@ -40,15 +40,18 @@ function onCancel() {
 }
 
 // 定义创建Post的函数
-const createPost = async (data) => {
+const createPost = async (jsondata) => {
+  console.log(jsondata)
   try {
     let url = "http://127.0.0.1:8080/api/v1/cmdb"
 
      // 设置超时时间为3秒
     let timeout = { timeout: 3000 }
     
-    const { response } = await axios.post(url, data, timeout);
-    if (response.code === 0) {
+    // const { response } = await axios.post(url, jsondata, timeout);
+    const response = await axios.post(url, jsondata, timeout);
+    console.log(">>>",response)
+    if (response.status === 200 && response.data.code === 0) {
       // 处理成功情况
       ElMessage({
         message: '提交成功.',
@@ -56,7 +59,7 @@ const createPost = async (data) => {
       })
     } else {
       // 处理失败情况
-      ElMessage.error('Oops, 提交失败:', response.message)
+      ElMessage.error('Oops, 提交失败:', response.data.message)
     }
   } catch (error) {
     // 异常
