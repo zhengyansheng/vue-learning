@@ -1,26 +1,22 @@
-
 <template>
 
-<MySalary ref="SalaryInfo"></MySalary><br>
-<button @click="addSalary">提交</button>
-
+<div>
+    <CmdbListPage></CmdbListPage>
+</div>
 <br>
-<MyElementPlus></MyElementPlus>
+
+<div class="mb-4">
+    <CmdbAddPage ref="InsanceInfo"></CmdbAddPage><br>
+</div>
 
 </template>
 
 <script setup lang="ts">
+
 import { ref } from "vue";
-import MySalary from "./components/MySalary.vue"
-import MyElementPlus from '@/components/MyElementPlus.vue'
+import CmdbListPage from "@/components/cmdb/CmdbList.vue"
 
-let SalaryInfo = ref()
-
-function addSalary() {
-    console.log(SalaryInfo) // ref对象
-    console.log(SalaryInfo.value) // proxy对象
-    SalaryInfo.value.salary+=1
-}
+let InsanceInfo = ref();
 
 </script>
 
